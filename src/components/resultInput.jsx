@@ -94,7 +94,10 @@ function GameInput({ data, setData }) {
 
     return (
         <div className="box">
+            <div className="box">
+                <h2>Ergebnis eintragen</h2>
 
+            
             <FormControl sx={{
                 m: 0, minWidth: 225
 
@@ -153,7 +156,7 @@ function GameInput({ data, setData }) {
                 Ergebnis eintragen
             </Button>
 
-
+            </div>  
 
 
         </div>
