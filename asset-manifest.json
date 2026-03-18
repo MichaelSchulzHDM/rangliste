@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/rangliste/static/css/main.c04abe9c.css",
-    "main.js": "/rangliste/static/js/main.866d9546.js",
+    "main.js": "/rangliste/static/js/main.66216781.js",
     "index.html": "/rangliste/index.html",
     "main.c04abe9c.css.map": "/rangliste/static/css/main.c04abe9c.css.map",
-    "main.866d9546.js.map": "/rangliste/static/js/main.866d9546.js.map"
+    "main.66216781.js.map": "/rangliste/static/js/main.66216781.js.map"
   },
   "entrypoints": [
     "static/css/main.c04abe9c.css",
-    "static/js/main.866d9546.js"
+    "static/js/main.66216781.js"
   ]
 }
