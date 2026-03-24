@@ -2,12 +2,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-
 function GameInput({ data, setData, loadData }) {
     useEffect(() => {
         console.log("data changed:", data);
@@ -19,6 +13,10 @@ function GameInput({ data, setData, loadData }) {
 
 
     async function addPlayer() {
+        if (!name || !lastName) {
+            alert("Bitte geben Sie sowohl den Vor- als auch den Nachnamen ein.");
+            return;
+        }
 
         const newPlayer = {
             id: Date.now(), // Simple ID generation - replace with a proper ID generator if needed
@@ -47,25 +45,16 @@ function GameInput({ data, setData, loadData }) {
 
     }
 
-    async function deletePlayer(playerId) {
-        setData(prevData => prevData.filter(player => player.id !== playerId));
 
-        await fetch("https://script.google.com/macros/s/AKfycbxVbo12TyZWwfVK3iJzqCD11XfciG6BSWAGpCCNmQ7rjuixPOsvHZdxg9Hh0mJVwGpb/exec", {
-            method: "POST",
-            body: JSON.stringify({
-                action: "delete",
-                id: playerId
-            })
-        });
-        await loadData();
-    }
-
-    const [selectedUser1, setSelectedUser1] = useState("0");
     return (
         <div className="box">
             <div className="box">
                 <h2>Spieler anlegen</h2>
                 <TextField
+                    sx={{
+                        m: 1, minWidth: 225
+
+                    }}
                     label="Vorname"
                     variant="outlined"
                     value={name}
@@ -73,45 +62,25 @@ function GameInput({ data, setData, loadData }) {
                 />
 
                 <TextField
+                    sx={{
+                        m: 1, minWidth: 225
+
+                    }}
                     label="Nachname"
                     variant="outlined"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                 />
 
-                <Button variant="outlined" onClick={addPlayer}>
+                <Button variant="contained" onClick={addPlayer} sx={{
+                    m: 1, minWidth: 225
+
+                }}>
                     Spieler hinzufügen
                 </Button>
             </div>
 
-            <div className="box">
-                <h2>Spieler löschen</h2>
-
-                <FormControl sx={{
-                    m: 0, minWidth: 225
-
-                }}>
-                    <InputLabel id="demo-simple-select-label">Spieler</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={data.name}
-                        label="player_1"
-                        onChange={(e) => setSelectedUser1(e.target.value)}
-                        defaultValue={""}
-                    >
-                        {data.map((person) => (
-                            <MenuItem key={person.id} value={person.id}>
-                                {person.name} {person.lastName}
-                            </MenuItem>
-                        ))}
-                    </Select>
-
-                </FormControl>
-                <Button variant="outlined" onClick={() => deletePlayer(selectedUser1)}>
-                    Spieler löschen
-                </Button>
-            </div>
+            
         </div>
 
     );
