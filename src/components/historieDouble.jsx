@@ -38,8 +38,10 @@ function Historie(data) {
                     <TableHead>
                         <TableRow>
                             <TableCell style={{ fontWeight: 'bold' }}>Datum</TableCell>
-                            <TableCell style={{ fontWeight: 'bold' }}>Spieler1</TableCell>
-                            <TableCell style={{ fontWeight: 'bold' }}>Spieler2</TableCell>
+                            <TableCell style={{ fontWeight: 'bold' }}>Spieler 1</TableCell>
+                            <TableCell style={{ fontWeight: 'bold' }}>Spieler 2</TableCell>
+                            <TableCell style={{ fontWeight: 'bold' }}>Spieler 3</TableCell>
+                            <TableCell style={{ fontWeight: 'bold' }}>Spieler 4</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -51,22 +53,38 @@ function Historie(data) {
                                 <TableCell>{new Date(row.Datum).toLocaleDateString()}</TableCell>
                                 <TableCell component="th" scope="row" sx={{
                                     backgroundColor:
-                                        row.Gewinner === row.Spieler1 ? "green" : "inherit",
+                                        row.Gewinner === "Team 1" ? "green" : "inherit",
                                     color:
-                                        row.Gewinner === row.Spieler1 ? "white" : "inherit",
+                                        row.Gewinner === "Team 1" ? "white" : "inherit",
                                     fontWeight:
-                                        row.Gewinner === row.Spieler1 ? "bold" : "normal"
+                                        row.Gewinner === "Team 1" ? "bold" : "normal"
                                 }}>
                                     {row.Spieler1}
                                 </TableCell>
                                 <TableCell sx={{
                                     backgroundColor:
-                                        row.Gewinner === row.Spieler2 ? "green" : "inherit",
+                                        row.Gewinner === "Team 1" ? "green" : "inherit",
                                     color:
-                                        row.Gewinner === row.Spieler2 ? "white" : "inherit",
+                                        row.Gewinner === "Team 1" ? "white" : "inherit",
                                     fontWeight:
-                                        row.Gewinner === row.Spieler2 ? "bold" : "normal"
+                                        row.Gewinner === "Team 1" ? "bold" : "normal"
                                 }}>{row.Spieler2}</TableCell>
+                                <TableCell sx={{
+                                    backgroundColor:
+                                        row.Gewinner === "Team 2" ? "green" : "inherit",
+                                    color:
+                                        row.Gewinner === "Team 2" ? "white" : "inherit",
+                                    fontWeight:
+                                        row.Gewinner === "Team 2" ? "bold" : "normal"
+                                }}>{row.Spieler3}</TableCell>
+                                <TableCell sx={{
+                                    backgroundColor:
+                                        row.Gewinner === "Team 2" ? "green" : "inherit",
+                                    color:
+                                        row.Gewinner === "Team 2" ? "white" : "inherit",
+                                    fontWeight:
+                                        row.Gewinner === "Team 2" ? "bold" : "normal"
+                                }}>{row.Spieler4}</TableCell>
                                 
 
                             </TableRow>

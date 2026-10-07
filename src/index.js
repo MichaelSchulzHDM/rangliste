@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import AppDoppel from './pages/AppDoppel'
 import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Admin from "./pages/Admin";
@@ -14,6 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path='/doppel' element={<AppDoppel />} />
         
       </Routes>
     </HashRouter>

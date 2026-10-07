@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { einzelTabelleUrl, einzelHistorieUrl } from './config';
 
 
 function GameInput({ data, setData, historieData, setHistorieData }) {
@@ -72,7 +73,7 @@ function GameInput({ data, setData, historieData, setHistorieData }) {
 
         setHistorieData(prevData => [...prevData, newResult]);
 
-        await fetch("https://script.google.com/macros/s/AKfycbxVbo12TyZWwfVK3iJzqCD11XfciG6BSWAGpCCNmQ7rjuixPOsvHZdxg9Hh0mJVwGpb/exec", {
+        await fetch(einzelTabelleUrl, {
             method: "POST",
             body: JSON.stringify({
                 action: "update",
@@ -83,7 +84,7 @@ function GameInput({ data, setData, historieData, setHistorieData }) {
             })
         }).catch(err => console.error("Fehler beim Update Spieler 1:", err));
 
-        await fetch("https://script.google.com/macros/s/AKfycbxVbo12TyZWwfVK3iJzqCD11XfciG6BSWAGpCCNmQ7rjuixPOsvHZdxg9Hh0mJVwGpb/exec", {
+        await fetch(einzelTabelleUrl, {
             method: "POST",
             body: JSON.stringify({
                 action: "update",
@@ -103,7 +104,7 @@ function GameInput({ data, setData, historieData, setHistorieData }) {
 
 
 
-        await fetch("https://script.google.com/macros/s/AKfycbw4AnfJJVDLX82Ip63nAfaFQuz6QyIvMHzAP5-04T7TyCawS6Q2NH94bCAZohUVTpocKA/exec", {
+        await fetch(einzelHistorieUrl, {
             method: "POST",
             body: JSON.stringify({
                 action: "create",

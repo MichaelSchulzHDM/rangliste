@@ -1,13 +1,13 @@
-import './App.css';
-import './index.css';
-import Table from './components/table.jsx'
-import Player from './components/addPlayer.jsx'
-import ResultInput from './components/resultInput.jsx'
-import Historie from './components/historie.jsx'
+import '../App.js';
+import '../index.css';
+import Table from '../components/table.jsx'
+import Player from '../components/addPlayerDouble.jsx'
+import ResultInput from '../components/resultInputDoppel.jsx'
+import Historie from '../components/historieDouble.jsx'
 import { useEffect, useState } from "react";
-import { einzelTabelleUrl, einzelHistorieUrl } from './components/config';
+import { doppelTabelleUrl, doppelHistorieUrl } from '../components/config';
 
-function App() {
+function AppDoppel() {
 
   const [data, setData] = useState([]);
 
@@ -17,7 +17,7 @@ function App() {
 
   async function loadData() {
 
-    const res = await fetch(einzelTabelleUrl);
+    const res = await fetch(doppelTabelleUrl);
     const result = await res.json();
 
     setData(result);
@@ -31,7 +31,7 @@ function App() {
 
   async function loadHistorieData() {
 
-    const res = await fetch(einzelHistorieUrl);
+    const res = await fetch(doppelHistorieUrl);
     const result = await res.json();
 
     setHistorieData(result);
@@ -47,7 +47,7 @@ function App() {
       <main className="main">
 
         <header className="header">
-          <h2>SG Stern Einzelrangliste</h2>
+          <h2>SG Stern Doppelrangliste</h2>
         </header>
 
         <div className="content">
@@ -65,4 +65,4 @@ function App() {
 }
 
 
-export default App;
+export default AppDoppel;
