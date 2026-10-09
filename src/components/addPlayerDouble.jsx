@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useState, useEffect } from "react";
-import { einzelTabelleUrl } from './config';
+import { doppelTabelleUrl } from './config';
 
 function GameInput({ data, setData, loadData }) {
     useEffect(() => {
@@ -33,7 +33,7 @@ function GameInput({ data, setData, loadData }) {
         setLastName("");
         setData(prevData => [...prevData, newPlayer]);
 
-        await fetch(einzelTabelleUrl, {
+        await fetch(doppelTabelleUrl, {
             method: "POST",
             body: JSON.stringify({
                 action: "create",
