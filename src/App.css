@@ -12,10 +12,24 @@ body {
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
     padding: 20px 30px;
     font-size: 22px;
     font-weight: bold;
     border-bottom: 1px solid #e5e7eb;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
 }
 
 
