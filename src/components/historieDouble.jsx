@@ -6,14 +6,39 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Paper from '@mui/material/Paper';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+function getTimestamp(value) {
+    const dateString = String(value ?? "").trim();
+    const isoDateMatch = dateString.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
 
-function Historie(data) {
+    if (isoDateMatch) {
+        const [, year, month, day] = isoDateMatch;
+        return new Date(Number(year), Number(month) - 1, Number(day)).getTime();
+    }
 
-    console.log("data", data);
+    const localDateMatch = dateString.match(/^(\d{1,2})[./](\d{1,2})[./](\d{4})$/);
+    if (localDateMatch) {
+        const [, first, second, year] = localDateMatch;
+        const firstNumber = Number(first);
+        const secondNumber = Number(second);
+        const day = dateString.includes(".") || firstNumber > 12 ? firstNumber : secondNumber;
+        const month = dateString.includes(".") || firstNumber > 12 ? secondNumber : firstNumber;
+        return new Date(Number(year), month - 1, day).getTime();
+    }
 
-    let sortedData = data.data;
+    const timestamp = Date.parse(dateString);
+    return Number.isNaN(timestamp) ? null : timestamp;
+}
+
+function Historie({ data = [] }) {
+    const sortedData = [...data].sort((a, b) => {
+        const timestampA = getTimestamp(a.Datum);
+        const timestampB = getTimestamp(b.Datum);
+        if (timestampA === null) return timestampB === null ? 0 : 1;
+        if (timestampB === null) return -1;
+        return timestampB - timestampA;
+    });
     
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -28,8 +53,6 @@ function Historie(data) {
     };
 
     const visibleData = sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-    console.log("sortedData", sortedData);
 
     return (
         <div className="box">

@@ -7,6 +7,17 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { doppelTabelleUrl, doppelHistorieUrl } from './config';
 
+function calculateTeamRatings(player1Rating, player2Rating, score, expected, k) {
+    const teamChange = k * (score - expected);
+    const ratingGap = Math.abs(player1Rating - player2Rating);
+    const adjustment = Math.abs(teamChange) * Math.min(ratingGap / 400, 0.5);
+    const player1IsLowerRated = player1Rating <= player2Rating;
+
+    return [
+        Math.round(player1Rating + teamChange + (player1IsLowerRated ? adjustment : -adjustment)),
+        Math.round(player2Rating + teamChange + (player1IsLowerRated ? -adjustment : adjustment))
+    ];
+}
 
 function GameInput({ data, setData, historieData, setHistorieData }) {
 
@@ -44,10 +55,20 @@ function GameInput({ data, setData, historieData, setHistorieData }) {
             score2 = 0.5;
         }
 
-        const newRating1 = Math.round(player1Rating + k * (score1 - expected1));
-        const newRating2 = Math.round(player2Rating + k * (score1 - expected1));
-        const newRating3 = Math.round(player3Rating + k * (score2 - expected2));
-        const newRating4 = Math.round(player4Rating + k * (score2 - expected2));
+        const [newRating1, newRating2] = calculateTeamRatings(
+            player1Rating,
+            player2Rating,
+            score1,
+            expected1,
+            k
+        );
+        const [newRating3, newRating4] = calculateTeamRatings(
+            player3Rating,
+            player4Rating,
+            score2,
+            expected2,
+            k
+        );
 
         setData(prevData =>
             prevData.map(item =>
@@ -287,4 +308,3 @@ function GameInput({ data, setData, historieData, setHistorieData }) {
 }
 
 export default GameInput;
-
